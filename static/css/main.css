@@ -1,0 +1,24 @@
+.mb-10{margin-bottom: 10px;}
+.pb-10{padding-bottom: 10px;}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.brand {
+  font-family: 'Kaushan Script', cursive;
+}
+
+#login {
+  padding: 15px 25px;
+}
+
+.hero.is-black a.navbar-item.is-active {
+  background-color: #23c150;
+}
+
+.input:focus {
+  outline: none !important;
+  border:1px solid rgba(0,0,0, 0.2);
+  box-shadow: 0 0 5px #efefef;
+}
