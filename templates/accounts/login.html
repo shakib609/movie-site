@@ -1,72 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'base/base_hero.html' %}
 
-{% block body %}
-{% url 'accounts:login' as login_url %}
-<section class="hero is-black is-fullheight">
-  <div class="hero-head">
-    <header class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item has-text-weight-bold brand">
-            YIFY Clone
-          </a>
-          <span class="navbar-burger burger" data-target="navbarMenuHeroC">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroC" class="navbar-menu">
-          <div class="navbar-end">
-            <a class="navbar-item{% if request.path == login_url %} is-active{% endif %}"
-              href="{{ login_url }}">
-              Login
-            </a>
-            <a class="navbar-item">
-              Register
-            </a>
-            <a class="navbar-item">
-              About
-            </a>
+{% block content%}
+<div class="columns">
+  <div class="column is-4 is-offset-4">
+    <div class="box has-background-success has-text-white">
+      <div class="brand subtitle has-text-weight-bold has-text-centered">
+        YIFY Clone
+      </div>
+      <form action="" method="post">
+        <div class="field">
+          <div class="control">
+            <input class="input" type="text" placeholder="Username" required>
           </div>
         </div>
-      </div>
-    </header>
-  </div>
-
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-4 is-offset-4">
-          <div class="box has-background-success has-text-white">
-            <div class="brand subtitle has-text-weight-bold has-text-centered">
-              YIFY Clone
+        <div class="field">
+          <div class="control">
+            <input class="input" type="password" placeholder="Password" required>
+          </div>
+        </div>
+        <div class="field">
+            <div class="control">
+              <button class="button is-dark is-fullwidth">Login</button>
             </div>
-            <form action="" method="post">
-              <div class="field">
-                <div class="control">
-                  <input class="input" type="text" placeholder="Username" required>
-                </div>
-              </div>
-              <div class="field">
-                <div class="control">
-                  <input class="input" type="password" placeholder="Password" required>
-                </div>
-              </div>
-              <div class="field">
-                  <div class="control">
-                    <button class="button is-dark is-fullwidth">Login</button>
-                  </div>
-                </div>
-            </form>
           </div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
-
-  <div class="hero-foot pb-10">
-    <p class="is-size-7 has-text-centered">Created by Shakib Hossain.</p>
-  </div>
-</section>
-{% endblock body %}
+</div>
+{% endblock content %}
