@@ -3,24 +3,42 @@
 {% block content%}
 <div class="columns">
   <div class="column is-4 is-offset-4">
-    <div class="box has-background-success has-text-white">
-      <div class="brand subtitle has-text-weight-bold has-text-centered">
-        YIFY Clone
+    <div class="box has-text-black">
+      <div class="subtitle has-text-centered has-text-success has-text-weight-bold">
+        Login
       </div>
       <form action="" method="post">
+        {% csrf_token %}
         <div class="field">
-          <div class="control">
-            <input class="input" type="text" placeholder="Username" required>
+          <div class="control has-icons-left">
+            <input class="input{% if form.errors %} is-danger{% endif %}"
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  required>
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
           </div>
         </div>
         <div class="field">
-          <div class="control">
-            <input class="input" type="password" placeholder="Password" required>
+          <div class="control has-icons-left">
+            <input class="input{% if form.errors %} is-danger{% endif %}"
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  required>
+            <span class="icon is-small is-left">
+              <i class="fas fa-key"></i>
+            </span>
           </div>
+          {% if form.errors%}
+          <p class="help is-danger">Username or Password incorrect.</p>
+          {% endif %}
         </div>
         <div class="field">
             <div class="control">
-              <button class="button is-dark is-fullwidth">Login</button>
+              <button class="button is-success is-fullwidth">Login</button>
             </div>
           </div>
       </form>

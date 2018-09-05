@@ -19,6 +19,10 @@ body {
 
 .input:focus {
   outline: none !important;
-  border:1px solid rgba(0,0,0, 0.2);
-  box-shadow: 0 0 5px #efefef;
+  border:1px solid #23d160;
+  box-shadow: 0 0 5px #23d160;
+}
+.input.is-danger:focus {
+  border:1px solid #ff3860;
+  box-shadow: 0 0 5px #ff3860;
 }
