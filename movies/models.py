@@ -18,9 +18,18 @@ class Movie(models.Model):
         blank=True)
     year = models.IntegerField()
     imdb_rating = models.FloatField(default=0)
+    genres = models.ManyToManyField(
+        'Genre', related_name='movies')
 
     def __str__(self):
         return '{}({})'.format(self.title, self.year)
+
+
+class Genre(models.Model):
+    name = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
 
 
 class Comment(models.Model):
@@ -28,7 +37,8 @@ class Comment(models.Model):
         User, on_delete=models.CASCADE, related_name='comments')
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='comments')
+    movie = models.ForeignKey(
+        Movie, on_delete=models.CASCADE, related_name='comments')
 
     def __str__(self):
         return '{}... - {}'.format(self.text[:5], self.created_by.username)
@@ -39,3 +49,6 @@ class DownloadLink(models.Model):
     link = models.CharField(max_length=512)
     movie = models.ForeignKey(
         Movie, on_delete=models.CASCADE, related_name='download_links')
+
+    def __str__(self):
+        return '{} - {}'.format(self.quality, self.movie.title)
