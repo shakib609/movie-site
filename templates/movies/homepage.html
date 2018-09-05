@@ -7,7 +7,9 @@
 {% block content %}
 {% if movies|first %}
   {% with movies|first as m %}
-  <img src="/media/{{ m.poster_image}}" class="image-overlay">
+    {% if m.poster_image %}
+    <img src="/media/{{ m.poster_image}}" class="image-overlay">
+    {% endif %}
   {% endwith %}
 <div class="gradient-overlay"></div>
 {% endif %}
@@ -24,17 +26,18 @@
           and MP4 container for best compatibility with all devices, so all users around
           the world can download <span class="has-text-success">YIFY</span> torrents and enjoy the movies.
         </p>
+        <hr>
       </div>
     </div>
   </div>
   <h3 class="is-size-5 has-text-centered mb-20">
-    <i class="fas fa-star"></i> Latest Additions
+    <i class="fas fa-star has-text-warning"></i> Latest Additions
   </h3>
   <div class="columns is-multiline">
     {% for movie in movies %}
     <div class="column is-3">
       <div class="poster-container">
-        <a href="#">
+        <a href="{% url 'movies:detail' movie.id %}">
           <div class="image-container">
             <div class="overlay has-text-centered">
               <p class="is-size-4 has-text-white" style="margin-top:200px;">
