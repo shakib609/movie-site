@@ -19,6 +19,7 @@ class Movie(models.Model):
         blank=True)
     year = models.IntegerField()
     imdb_rating = models.FloatField(default=0)
+    trailer_link = models.URLField(null=True, blank=True, max_length=512)
     genres = models.ManyToManyField(
         'Genre', related_name='movies')
 
