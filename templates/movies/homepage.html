@@ -5,6 +5,12 @@
 {% block body_classes %}has-background-black has-text-white{% endblock body_classes %}
 
 {% block content %}
+{% if movies|first %}
+  {% with movies|first as m %}
+  <img src="/media/{{ m.poster_image}}" class="image-overlay">
+  {% endwith %}
+<div class="gradient-overlay"></div>
+{% endif %}
 <div class="container is-fluid">
   <div class="hero is-small mb-20 mt-40">
     <div class="hero-body">
@@ -32,9 +38,9 @@
           <div class="image-container">
             <div class="overlay has-text-centered">
               <p class="is-size-4 has-text-white" style="margin-top:200px;">
-                <i class="fab fa-imdb"></i> {{ movie.imdb_rating }}
+                <i class="fab fa-imdb has-text-warning"></i> {{ movie.imdb_rating }}
               </p>
-              <button class="button is-warning">Details</button>
+              <button class="button is-success">Details</button>
             </div>
             <img
               src="{% if movie.poster_image %}/media/{{ movie.poster_image }}{% else %}{% static 'images/default-poster.png' %}{% endif %}"
