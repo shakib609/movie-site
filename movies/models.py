@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 import uuid
 
 
 def generate_upload_location(instance, filename):
     random = str(uuid.uuid4())
-    return 'mov_{}/{}.jpg'.format(instance.id, random)
+    return '{}/{}.jpg'.format(slugify(instance.title), random)
 
 
 class Movie(models.Model):
