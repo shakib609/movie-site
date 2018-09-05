@@ -32,3 +32,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return '{}... - {}'.format(self.text[:5], self.created_by.username)
+
+
+class DownloadLink(models.Model):
+    quality = models.CharField(max_length=16)
+    link = models.CharField(max_length=512)
+    movie = models.ForeignKey(
+        Movie, on_delete=models.CASCADE, related_name='download_links')
