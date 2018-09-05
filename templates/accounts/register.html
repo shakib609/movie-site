@@ -1,0 +1,61 @@
+{% extends 'base/base_hero.html' %}
+
+{% block content%}
+<div class="columns">
+  <div class="column is-4 is-offset-4">
+    <div class="box">
+      <div class="subtitle has-text-weight-bold has-text-centered has-text-success">
+        Register
+      </div>
+      <form action="" method="post">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="message is-danger">
+          <div class="message-body">
+            <ul class="bullet-list">
+              {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% endif %}
+        {% for field in form %}
+        <div class="field">
+          <div class="control has-icons-left">
+            <input
+              class="input {% if field.errors %}is-danger{% endif %}"
+              type="{{ field.field.widget.input_type }}"
+              name="{{ field.html_name }}"
+              value="{% if field.value %}{{ field.value }}{% else %}{% endif %}"
+              placeholder="{{ field.label }}"
+              required>
+            <span class="icon is-small is-left">
+              {% if field.html_name == "username" %}
+                <i class="fas fa-user"></i>
+              {% elif field.html_name == "email" %}
+                <i class="fas fa-envelope"></i>
+              {% elif field.html_name == "password1" or field.html_name == "password2" %}
+                <i class="fas fa-key"></i>
+              {% endif %}
+            </span>
+          </div>
+          {% if field.errors %}
+          <p class="help is-danger">
+            {% for error in field.errors %}
+              {{ error }} <br>
+            {% endfor %}
+          </p>
+          {% endif %}
+        </div>
+        {% endfor %}
+        <div class="field">
+          <div class="control">
+            <button class="button is-success is-fullwidth">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

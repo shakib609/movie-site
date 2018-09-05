@@ -26,3 +26,7 @@ body {
   border:1px solid #ff3860;
   box-shadow: 0 0 5px #ff3860;
 }
+
+.bullet-list {
+  list-style: disc;
+}
