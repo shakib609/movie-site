@@ -1,0 +1,41 @@
+
+{% url 'accounts:login' as login_url %}
+{% url 'accounts:register' as register_url %}
+{% url 'accounts:logout' as logout_url %}
+{% url 'movies:homepage' as homepage_url %}
+
+<nav class="navbar is-dark">
+  <div class="container is-fluid">
+      <div class="navbar-brand brand">
+      <a class="navbar-item" href="{{ homepage_url }}">
+        YIFY Clone
+      </a>
+      <div class="navbar-burger burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <a href="{{ homepage_url }}"
+          class="navbar-item {% if request.path == homepage_url %}is-active{% endif %}">
+          Home
+        </a>
+        {% if user.is_authenticated %}
+        <a href="{{ logout_url }}" class="navbar-item">Logout</a>
+        {% else %}
+        <a href="{{ login_url }}"
+          class="navbar-item {% if request.path == login_url %}is-active{% endif %}">
+          Login
+        </a>
+        <a href="{{ register_url }}"
+          class="navbar-item {% if request.path == register_url %}is-active{% endif %}">
+          Register
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

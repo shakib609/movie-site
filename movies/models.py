@@ -23,6 +23,9 @@ class Movie(models.Model):
     genres = models.ManyToManyField(
         'Genre', related_name='movies')
 
+    class Meta:
+        ordering = ['-year']
+
     def __str__(self):
         return '{}({})'.format(self.title, self.year)
 
