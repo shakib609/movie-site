@@ -14,7 +14,7 @@
   {% endblock extra_css %}
   <title>{% block title %}YIFY Clone{% endblock title %}</title>
 </head>
-<body class="{% block body_classes %}{% endblock %}">
+<body class="{% block body_classes %}has-background-black has-text-white{% endblock %}">
 {% block body %}
   {% include 'include/navbar.html' %}
   {% block content %}{% endblock content %}

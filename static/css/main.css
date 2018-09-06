@@ -63,28 +63,45 @@ body {
 
 
 .poster-container {
-  width: 236px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.center-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.image-container {
-  border: #fff  5px solid;
+.poster-container img {
+  border: 5px solid #fff;
   border-radius: 3px;
-  position: relative;
+  transition: all 0.2s;
 }
-.column.is-2 .image-container {
+.poster-container:hover a img {
+  border-color: #23c160;
+}
+
+.poster-container.other-movies img {
   border-width: 2px;
 }
 
-.image-container:hover {
+.movie-poster {
+  border: 5px solid #fff;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+
+.movie:hover .movie-poster {
   border-color: #23d160;
 }
 
 .overlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.6);
+  width: 230px;
+  height: 345px;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.75);
   opacity: 0;
   transition: all 0.3s;
 }
@@ -131,7 +148,7 @@ body {
 }
 
 .comments {
-  max-height: 378px;
+  max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -145,4 +162,8 @@ body {
 
 .navbar.is-black {
   border-bottom: 3px solid #23c150;
+}
+
+.container {
+  padding: 0 15px;
 }

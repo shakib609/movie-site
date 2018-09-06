@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="columns is-multiline mt-10">
+  {% for movie in movies %}
+  <div class="column is-3 movie">
+    <a href="{% url 'movies:detail' movie.id %}">
+      <div class="image-container center-child">
+          <img
+            src="{% if movie.poster_image %}/media/{{ movie.poster_image }}{% else %}{% static 'images/default-poster.png' %}{% endif %}"
+            alt="{{ movie.title }}"
+            class="movie-poster is-relative">
+          <div class="overlay has-text-centered">
+            <p class="is-size-4 has-text-white" style="margin-top:200px;">
+              <i class="fab fa-imdb has-text-warning"></i> {{ movie.imdb_rating }}
+            </p>
+            <button class="button is-success">Details</button>
+          </div>
+      </div>
+    </a>
+    <p class="is-size-6 has-text-grey-lighter has-text-centered mt-10">
+      <span class="has-text-weight-bold">{{ movie.title }}</span><br>
+      <small>{{ movie.year }}</small>
+    </p>
+  </div>
+  {% endfor %}
+</div>

@@ -2,17 +2,8 @@
 
 {% load static %}
 
-{% block body_classes %}has-background-black has-text-white{% endblock body_classes %}
-
 {% block content %}
-{% if movies|first %}
-  {% with movies|first as m %}
-    {% if m.poster_image %}
-    <img src="/media/{{ m.poster_image}}" class="image-overlay">
-    {% endif %}
-  {% endwith %}
-<div class="gradient-overlay"></div>
-{% endif %}
+{% include 'include/background-overlay.html' %}
 <div class="container is-fluid">
   <div class="hero is-small mb-20 mt-40">
     <div class="hero-body">
@@ -33,31 +24,6 @@
   <h3 class="is-size-5 has-text-centered mb-20">
     <i class="fas fa-star has-text-warning"></i> Latest Additions
   </h3>
-  <div class="columns is-multiline">
-    {% for movie in movies %}
-    <div class="column is-3">
-      <div class="poster-container">
-        <a href="{% url 'movies:detail' movie.id %}">
-          <div class="image-container">
-            <div class="overlay has-text-centered">
-              <p class="is-size-4 has-text-white" style="margin-top:200px;">
-                <i class="fab fa-imdb has-text-warning"></i> {{ movie.imdb_rating }}
-              </p>
-              <button class="button is-success">Details</button>
-            </div>
-            <img
-              src="{% if movie.poster_image %}/media/{{ movie.poster_image }}{% else %}{% static 'images/default-poster.png' %}{% endif %}"
-              alt="{{ movie.title }}"
-              class="movie-poster">
-          </div>
-        </a>
-        <p class="is-size-6">
-          <span class="has-text-weight-bold">{{ movie.title }}</span><br>
-          <small>{{ movie.year }}</small>
-        </p>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+  {% include 'include/movie-list.html' %}
 </div>
 {% endblock content %}

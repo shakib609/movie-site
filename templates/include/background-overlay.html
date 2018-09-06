@@ -1,0 +1,12 @@
+{% if movies %}
+  {% if movies|first %}
+    {% with movies|first as m %}
+      {% if m.poster_image %}
+        <img src="/media/{{ m.poster_image}}" class="image-overlay">
+      {% endif %}
+    {% endwith %}
+  {% endif %}
+{% elif movie.poster_image %}
+  <img src="/media/{{ movie.poster_image}}" class="image-overlay">
+{% endif %}
+<div class="gradient-overlay"></div>
