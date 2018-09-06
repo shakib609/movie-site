@@ -1,6 +1,10 @@
 from django.urls import path
 
-from .views import HomePageView, MovieDetailView, CommentCreateView
+from .views import (
+    HomePageView,
+    MovieDetailView,
+    CommentCreateView,
+    NoPiracyTemplateView)
 
 app_name = 'movies'
 
@@ -10,4 +14,6 @@ urlpatterns = [
     path(
         'movies/<int:pk>/comment/', CommentCreateView.as_view(),
         name='comment_create'),
+    path(
+        'nopiracy.html', NoPiracyTemplateView.as_view(), name='nopiracy')
 ]

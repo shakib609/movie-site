@@ -1,10 +1,10 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import (
+    ListView, DetailView, CreateView, TemplateView)
 
 from .models import Movie, Comment
 from .forms import CommentForm
@@ -59,3 +59,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
             extra_tags='is-danger'
         )
         return HttpResponseRedirect(self.get_success_url())
+
+
+class NoPiracyTemplateView(TemplateView):
+    template_name = 'movies/nopiracy.html'

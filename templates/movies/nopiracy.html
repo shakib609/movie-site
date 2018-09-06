@@ -1,0 +1,21 @@
+{% extends 'base/base_hero.html' %}
+
+{% block title %}
+No Piracy
+{% endblock title %}
+
+{% block content %}
+<div class="columns">
+  <div class="column is-6 is-offset-3">
+    <h1 class="title has-text-success has-text-centered">
+      <i class="fas fa-ban has-text-danger"></i> No Piracy!
+    </h1>
+    <p class="is-size-6 has-text-centered">
+      Let's go back to
+      <a href="{% url 'movies:homepage' %}"
+        class="has-text-success">
+        Homepage</a>.
+    </p>
+  </div>
+</div>
+{% endblock content %}
