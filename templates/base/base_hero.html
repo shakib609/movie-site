@@ -3,33 +3,10 @@
 {% block body %}
 {% url 'accounts:login' as login_url %}
 {% url 'accounts:register' as register_url %}
+{% url 'movies:homepage' as homepage_url %}
 <section class="hero is-black is-fullheight">
   <div class="hero-head">
-    <header class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item has-text-weight-bold brand">
-            YIFY Clone
-          </a>
-          <span class="navbar-burger burger" data-target="navbarMenuHeroC">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroC" class="navbar-menu">
-          <div class="navbar-end">
-            <a class="navbar-item{% if request.path == login_url %} is-active{% endif %}"
-              href="{{ login_url }}">
-              Login
-            </a>
-            <a class="navbar-item{% if request.path == register_url %} is-active{% endif %}"
-              href="{{ register_url }}">
-              Register
-            </a>
-          </div>
-        </div>
-      </div>
+    {% include 'include/navbar.html' %}
     </header>
   </div>
 

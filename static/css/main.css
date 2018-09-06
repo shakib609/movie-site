@@ -25,19 +25,13 @@ body {
   padding: 15px 25px;
 }
 
-a.navbar-item.has-text-success:hover {
-  color: #fff !important;
-}
-
 .hero.is-black a.navbar-item.is-active {
   background-color: #23c150;
 }
-.navbar.is-dark .navbar-end>a.navbar-item.is-active {
+.navbar.is-black .navbar-end>a.navbar-item.is-active {
   background-color: #23c150;
 }
-.navbar.is-dark .navbar-brand>a.navbar-item:hover {
-  background-color: #23c150;
-}
+
 .input:focus {
   outline: none !important;
   border:1px solid #23d160;
@@ -77,6 +71,9 @@ a.navbar-item.has-text-success:hover {
   border: #fff  5px solid;
   border-radius: 3px;
   position: relative;
+}
+.column.is-2 .image-container {
+  border-width: 2px;
 }
 
 .image-container:hover {
@@ -133,6 +130,19 @@ a.navbar-item.has-text-success:hover {
   position: relative;
 }
 
+.comments {
+  max-height: 378px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .comments .card-content {
   padding: 1.2rem;
+}
+
+.border-top {
+  border-top: 5px solid #000;
+}
+
+.navbar.is-black {
+  border-bottom: 3px solid #23c150;
 }
