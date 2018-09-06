@@ -79,13 +79,15 @@
       <div class="container is-fluid">
         <div class="columns">
           <div class="column">
-            <h4 class="title has-text-grey-lighter has-text-weight-bold">
+            <h4 class="subtitle has-text-grey-lighter has-text-weight-bold">
+              <i class="fab fa-wpexplorer has-text-success"></i>&nbsp;
               Plot
             </h4>
             <p class="has-text-justified">
               {{ movie.plot }}
             </p>
             <h4 class="mt-40 subtitle has-text-grey-lighter has-text-weight-bold">
+              <i class="fas fa-image has-text-success"></i>&nbsp;
               Trailer
             </h4>
             <div>
@@ -110,7 +112,7 @@
             <div class="comments">
               {% if comments %}
                 {% for comment in comments %}
-                <div class="card has-background-dark has-text-white">
+                <div class="card has-background-dark has-text-white mb-10">
                   <div class="card-content">
                     <div class="media">
                       <div class="media-content">
@@ -123,7 +125,7 @@
                             {{ comment.created_at | date }}
                           </small>
                         </p>
-                        <p class="is-size-65 pt-10 has-text-justified">
+                        <p class="is-size-65 pt-5 has-text-justified">
                           {{ comment.text }}
                         </p>
                       </div>
@@ -132,7 +134,7 @@
                 </div>
                 {% endfor %}
               {% else %}
-              <div class="card has-background-dark has-text-white">
+              <div class="card has-background-dark has-text-white mb-10">
                 <div class="card-content">
                   <div class="media">
                     <div class="media-content">
@@ -143,6 +145,52 @@
               </div>
               {% endif %}
             </div>
+            {% if user.is_authenticated %}
+
+            <div class="card has-background-dark has-text-white">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <form action="{% url 'movies:comment_create' movie.id %}"
+                      method="post">
+                      {% csrf_token %}
+                      <div class="field">
+                        <div class="control">
+                          <textarea
+                            class="textarea has-background-grey-lighter"
+                            placeholder="Enter your comment here"
+                            rows="2"
+                            name="text"
+                            ></textarea>
+                        </div>
+                      </div>
+                      <div class="field">
+                        <div class="control">
+                          <button class="button is-success is-fullwidth" type="submit">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% else %}
+            <div class="card has-background-dark has-text-white">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="is-size-5 has-text-centered">
+                      <a href="{% url 'accounts:login' %}?next={% url 'movies:detail' movie.id %}"
+                        class="has-text-success has-text-weight-bold">
+                        Login
+                      </a>
+                      to comment.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>

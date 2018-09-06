@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import DownloadLink
+from .models import DownloadLink, Comment
 
 
 CHOICES = [
@@ -17,3 +17,10 @@ class DownloadLinkForm(forms.ModelForm):
     class Meta:
         model = DownloadLink
         fields = '__all__'
+
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('text', )

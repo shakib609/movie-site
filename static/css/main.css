@@ -1,3 +1,4 @@
+.pt-5{padding-top: 5px;}
 .mb-10{margin-bottom: 10px;}
 .pb-10{padding-bottom: 10px;}
 .mb-20{margin-bottom: 20px;}
@@ -24,7 +25,7 @@ body {
   padding: 15px 25px;
 }
 
-a.has-text-success:hover {
+a.navbar-item.has-text-success:hover {
   color: #fff !important;
 }
 
@@ -45,6 +46,13 @@ a.has-text-success:hover {
 .input.is-danger:focus {
   border:1px solid #ff3860;
   box-shadow: 0 0 5px #ff3860;
+}
+
+.textarea:focus {
+  outline: none !important;
+  border:1px solid #23d160;
+  box-shadow: 0 0 5px #23d160;
+  background-color: #fff !important;
 }
 
 .bullet-list {
