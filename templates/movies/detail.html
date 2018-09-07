@@ -5,9 +5,9 @@
 
 {% block content %}
   {% include 'include/background-overlay.html' %}
-  <div class="container is-fluid mb-40 mt-40">
+  <div class="container mb-40 mt-40">
     <div class="columns">
-      <div class="column is-3 poster-container">
+      <div class="column container is-3 poster-container main-poster">
             <img
               src="{% if movie.poster_image %}/media/{{ movie.poster_image }}{% else %}{% static 'images/default-poster.png' %}{% endif %}"
               alt="{{ movie.title }}"
@@ -20,7 +20,8 @@
         <div class="field is-grouped">
         {% for genre in genres %}
           <p class="control">
-            <a class="button is-outlined is-transparent">
+            <a href="{{ genre.get_absolute_url }}"
+              class="button is-outlined is-transparent">
               {{ genre.name }}
             </a>
           </p>
@@ -54,7 +55,7 @@
         <div class="columns is-multiline is-mobile">
           {% for m in random_movies %}
           <div class="column is-6 poster-container other-movies">
-            <a href="{% url 'movies:detail' m.id %}">
+            <a href="{{ m.get_absolute_url }}">
               <img src="/media/{{ m.poster_image }}" alt="{{ m.title }}">
             </a>
           </div>
@@ -63,124 +64,120 @@
       </div>
     </div>
   </div>
-  <div class="hero is-black has-background-black is-small mt-70 pt-40 pb-40 is-relative">
-    <div class="hero-body">
-      <div class="container is-fluid">
-        <div class="columns">
-          <div class="column">
-            <h4 class="subtitle has-text-grey-lighter has-text-weight-bold">
-              <i class="fab fa-wpexplorer has-text-success"></i>&nbsp;
-              Plot
-            </h4>
-            <p class="has-text-justified">
-              {{ movie.plot }}
-            </p>
-            <h4 class="mt-40 subtitle has-text-grey-lighter has-text-weight-bold">
-              <i class="fas fa-image has-text-success"></i>&nbsp;
-              Trailer
-            </h4>
-            <div>
-            {% if movie.trailer_link %}
-              <iframe width="100%" height="350"
-                src="{{ movie.trailer_link }}"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen>
-              </iframe>
-            {% else %}
-            <p class="has-text-centered pt-40">
-              Trailer not added yet!
-            </p>
-            {% endif %}
-            </div>
-          </div>
-          <div class="column is-5">
-            <h4 class="subtitle has-text-grey-lighter has-text-weight-bold">
-              <i class="fas fa-comment-alt has-text-success"></i>&nbsp; {{ comments.count }} Comments
-            </h4>
-            <div class="comments">
-              {% if comments %}
-                {% for comment in comments %}
-                <div class="card has-background-dark has-text-white mb-10">
-                  <div class="card-content">
-                    <div class="media">
-                      <div class="media-content">
-                        <p class="is-size-65 has-text-grey-lighter">
-                          <span class="has-text-weight-bold">
-                            {{ comment.created_by.username }}
-                          </span>
-                          &nbsp;
-                          <small>
-                            {{ comment.created_at | date }}
-                          </small>
-                        </p>
-                        <p class="is-size-65 pt-5 has-text-justified">
-                          {{ comment.text }}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-              {% else %}
-              <div class="card has-background-dark has-text-white">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="is-size-6 has-text-centered">No comments yet!</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {% endif %}
-            </div>
-            {% if user.is_authenticated %}
-            <div class="card has-background-dark has-text-white border-top">
+  <div class="container mt-70 pt-40 pb-40">
+    <div class="columns">
+      <div class="column">
+        <h4 class="subtitle has-text-grey-lighter has-text-weight-bold">
+          <i class="fab fa-wpexplorer has-text-success"></i>&nbsp;
+          Plot
+        </h4>
+        <p class="has-text-justified">
+          {{ movie.plot }}
+        </p>
+        <h4 class="mt-40 subtitle has-text-grey-lighter has-text-weight-bold">
+          <i class="fas fa-image has-text-success"></i>&nbsp;
+          Trailer
+        </h4>
+        <div>
+        {% if movie.trailer_link %}
+          <iframe width="100%" height="350"
+            src="{{ movie.trailer_link }}"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+          </iframe>
+        {% else %}
+        <p class="has-text-centered pt-40">
+          Trailer not added yet!
+        </p>
+        {% endif %}
+        </div>
+      </div>
+      <div class="column is-5">
+        <h4 class="subtitle has-text-grey-lighter has-text-weight-bold">
+          <i class="fas fa-comment-alt has-text-success"></i>&nbsp; {{ comments.count }} Comments
+        </h4>
+        <div class="comments">
+          {% if comments %}
+            {% for comment in comments %}
+            <div class="card has-background-dark has-text-white mb-10">
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <form action="{% url 'movies:comment_create' movie.id %}"
-                      method="post">
-                      {% csrf_token %}
-                      <div class="field">
-                        <div class="control">
-                          <textarea
-                            class="textarea has-background-grey-lighter"
-                            placeholder="Enter your comment here"
-                            rows="2"
-                            name="text"
-                            ></textarea>
-                        </div>
-                      </div>
-                      <div class="field">
-                        <div class="control">
-                          <button class="button is-success is-fullwidth" type="submit">Submit</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% else %}
-            <div class="card has-background-dark has-text-white border-top">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <p class="is-size-5 has-text-centered">
-                      <a href="{% url 'accounts:login' %}?next={% url 'movies:detail' movie.id %}"
-                        class="has-text-success has-text-weight-bold">
-                        Login
-                      </a>
-                      to comment.
+                    <p class="is-size-65 has-text-grey-lighter">
+                      <span class="has-text-weight-bold">
+                        {{ comment.created_by.username }}
+                      </span>
+                      &nbsp;
+                      <small>
+                        {{ comment.created_at | date }}
+                      </small>
+                    </p>
+                    <p class="is-size-65 pt-5 has-text-justified">
+                      {{ comment.text }}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            {% endif %}
+            {% endfor %}
+          {% else %}
+          <div class="card has-background-dark has-text-white">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="is-size-6 has-text-centered">No comments yet!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        {% if user.is_authenticated %}
+        <div class="card has-background-dark has-text-white border-top">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <form action="{% url 'movies:comment_create' movie.id %}"
+                  method="post">
+                  {% csrf_token %}
+                  <div class="field">
+                    <div class="control">
+                      <textarea
+                        class="textarea has-background-grey-lighter"
+                        placeholder="Enter your comment here"
+                        rows="2"
+                        name="text"
+                        ></textarea>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="control">
+                      <button class="button is-success is-fullwidth" type="submit">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
+        {% else %}
+        <div class="card has-background-dark has-text-white border-top">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="is-size-5 has-text-centered">
+                  <a href="{% url 'accounts:login' %}?next={% url 'movies:detail' movie.id %}"
+                    class="has-text-success has-text-weight-bold">
+                    Login
+                  </a>
+                  to comment.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>

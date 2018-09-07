@@ -3,9 +3,10 @@
 {% url 'accounts:register' as register_url %}
 {% url 'accounts:logout' as logout_url %}
 {% url 'movies:homepage' as homepage_url %}
+{% url 'movies:browse_movies' as browse_movies_url %}
 
 <nav class="navbar is-black">
-  <div class="container is-fluid">
+  <div class="container">
       <div class="navbar-brand brand">
       <a class="navbar-item has-text-success" href="{{ homepage_url }}">
         YIFY Clone
@@ -22,6 +23,10 @@
         <a href="{{ homepage_url }}"
           class="navbar-item {% if request.path == homepage_url %}is-active{% endif %}">
           Home
+        </a>
+        <a href="{{ browse_movies_url }}"
+          class="navbar-item {% if request.path == browse_movies_url %}is-active{% endif %}">
+          Browse
         </a>
         {% if user.is_authenticated %}
         <a href="{{ logout_url }}" class="navbar-item">Logout</a>

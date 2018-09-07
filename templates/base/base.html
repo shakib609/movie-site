@@ -21,5 +21,23 @@
   {% block extra_js %}
   {% endblock extra_js %}
 {% endblock body %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      var navbarMenu = Array.prototype.slice.call(document.querySelectorAll('.navbar-menu'), 0)[0];
+
+      if (navbarBurgers.length > 0) {
+          navbarBurgers.forEach(function (el) {
+            el.addEventListener('click', function () {
+              var target = el.dataset.target;
+              var target = document.getElementById(target);
+              el.classList.toggle('is-active');
+              navbarMenu.classList.toggle('is-active');
+            });
+          });
+        }
+      }
+    );
+  </script>
 </body>
 </html>

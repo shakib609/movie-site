@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 
@@ -29,12 +30,19 @@ class Movie(models.Model):
     def __str__(self):
         return '{}({})'.format(self.title, self.year)
 
+    def get_absolute_url(self):
+        return reverse_lazy('movies:detail', kwargs={'pk': self.id})
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse_lazy('movies:browse_movies') +\
+            '?genre={}'.format(self.id)
 
 
 class Comment(models.Model):

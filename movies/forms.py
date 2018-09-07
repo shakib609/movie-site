@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import DownloadLink, Comment
+from .models import DownloadLink, Comment, Genre
 
 
 CHOICES = [
@@ -24,3 +24,11 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('text', )
+
+
+class BrowseMoviesForm(forms.Form):
+    query = forms.CharField(required=False)
+    genre = forms.ModelChoiceField(
+        queryset=Genre.objects.all(),
+        empty_label="Select Genre",
+        required=False)

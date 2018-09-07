@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Browse Movies | {{ block.super }}{% endblock title %}
+
+{% block content %}
+  <div class="container is-fluid">
+    <div class="columns is-multiline">
+      <div class="column is-8 is-offset-2 mt-70 mb-40">
+        <h1 class="title has-text-grey-lighter has-text-centered">
+          Search
+        </h1>
+        <form action="" method="get">
+          <div class="field">
+            <div class="control is-fullwidth">
+              <input class="input"
+                type="text"
+                name="query"
+                placeholder="Search query"
+                >
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select name="genre">
+                {% for x,y in form.fields.genre.choices %}
+                    <option value="{{ x }}"{% if form.genre.value == x %} selected{% endif %}>{{ y }}</option>
+                {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="control">
+              <button class="button is-success" type="submit">
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% include 'include/movie-list.html' %}
+{% endblock content %}

@@ -4,10 +4,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
-    ListView, DetailView, CreateView, TemplateView)
+    ListView, DetailView, CreateView, TemplateView, FormView)
 
-from .models import Movie, Comment
-from .forms import CommentForm
+from .models import Movie, Comment, Genre
+from .forms import CommentForm, BrowseMoviesForm
 
 
 class HomePageView(ListView):
@@ -63,3 +63,28 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
 class NoPiracyTemplateView(TemplateView):
     template_name = 'movies/nopiracy.html'
+
+
+class BrowseMoviesListView(FormView):
+    template_name = 'movies/browse.html'
+    context_object_name = 'movies'
+    http_method_names = ['get']
+    form_class = BrowseMoviesForm
+    default_queryset = Movie.objects.all().order_by('-year')[:8]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('query')
+        genre_id = self.request.GET.get('genre')
+        if genre_id and query:
+            queryset = Genre.objects.get(
+                id=genre_id).movies().filter(title__icontains=query)
+        elif genre_id or query:
+            if genre_id:
+                queryset = Genre.objects.get(id=genre_id).movies.all()
+            if query:
+                queryset = Movie.objects.filter(title__icontains=query)
+        else:
+            queryset = self.default_queryset
+        context["movies"] = queryset
+        return context
