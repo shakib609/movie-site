@@ -20,6 +20,18 @@
 
     <div class="navbar-menu">
       <div class="navbar-end">
+        <div class="field navbar-item">
+          <form action="{% url 'movies:browse_movies' %}" method="get">
+            <div class="control has-icons-left">
+              <input type="text"
+                name="query"
+                class="input is-rounded has-background-dark is-small has-text-white">
+              <span class="icon is-left">
+                <fas class="fas fa-search"></fas>
+              </span>
+            </div>
+          </form>
+        </div>
         <a href="{{ homepage_url }}"
           class="navbar-item {% if request.path == homepage_url %}is-active{% endif %}">
           Home

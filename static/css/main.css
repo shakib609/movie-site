@@ -44,14 +44,28 @@ body {
 .navbar-item {
   transition: all 0.3s;
 }
-.navbar.is-black .navbar-item.is-active,
-.navbar.is-black .navbar-item:hover,
+.navbar.is-black a.navbar-item.is-active,
+.navbar.is-black a.navbar-item:hover,
 .navbar.is-black .navbar-end>a.navbar-item:hover {
   background-color: #23c150;
   color: #fff;
 }
 .navbar .container {
   padding: 0;
+}
+.navbar .field {
+  margin-bottom: 0;
+}
+
+.navbar .input {
+  border-color: #363636;
+  color: #fff;
+}
+.navbar .input:focus {
+  color: #fff;
+}
+.navbar .control.has-icons-left .input:focus~.icon {
+  color: #efefef;
 }
 .navbar-item {
   padding: 8px 15px;
@@ -107,6 +121,7 @@ div.navbar-menu.is-active {
 .main-poster.poster-container {
   align-items: start;
   justify-content: start;
+  padding-top: 15px;
 }
 .center-child {
   display: flex;
