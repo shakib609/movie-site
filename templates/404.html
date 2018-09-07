@@ -1,0 +1,12 @@
+{% extends 'base/base_hero.html' %}
+
+{% block title %}Page Not Found | {{ block.super }}{% endblock title %}
+
+{% block content %}
+<h1 class="title has-text-centered has-text-white">
+  <i class="fas fa-exclamation-triangle has-text-warning"></i> Page Not Found!
+</h1>
+<p class="subtitle is-size-6 has-text-centered has-text-white">
+  Let's go back to <a href="{% url 'movies:homepage' %}" class="has-text-success">Homepage</a>.
+</p>
+{% endblock content %}
