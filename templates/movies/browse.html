@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load mytags %}
 
 {% block title %}Browse Movies | {{ block.super }}{% endblock title %}
 
@@ -16,6 +17,7 @@
                 type="text"
                 name="query"
                 placeholder="Search query"
+                value="{{ request.GET|get_item:'query' }}"
                 >
             </div>
           </div>
@@ -23,9 +25,11 @@
             <div class="control is-expanded">
               <div class="select is-fullwidth">
                 <select name="genre">
-                {% for x,y in form.fields.genre.choices %}
-                    <option value="{{ x }}"{% if form.genre.value == x %} selected{% endif %}>{{ y }}</option>
-                {% endfor %}
+                {% with request.GET|get_item:'genre'|get_int as selected_genre %}
+                  {% for x,y in form.fields.genre.choices %}
+                      <option value="{{ x }}"{% if selected_genre == x %} selected{% endif %}>{{ y }}</option>
+                  {% endfor %}
+                {% endwith %}
                 </select>
               </div>
             </div>

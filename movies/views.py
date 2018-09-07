@@ -71,7 +71,7 @@ class BrowseMoviesListView(BaseListView, FormView):
     context_object_name = 'movies'
     http_method_names = ['get']
     form_class = BrowseMoviesForm
-    paginate_by = 4
+    paginate_by = 8
 
     def get_queryset(self):
         query = self.request.GET.get('query')
