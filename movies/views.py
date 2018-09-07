@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView, DetailView, CreateView, TemplateView, FormView)
+from django.views.generic.list import BaseListView
 
 from .models import Movie, Comment, Genre
 from .forms import CommentForm, BrowseMoviesForm
@@ -65,15 +66,14 @@ class NoPiracyTemplateView(TemplateView):
     template_name = 'movies/nopiracy.html'
 
 
-class BrowseMoviesListView(FormView):
+class BrowseMoviesListView(BaseListView, FormView):
     template_name = 'movies/browse.html'
     context_object_name = 'movies'
     http_method_names = ['get']
     form_class = BrowseMoviesForm
-    default_queryset = Movie.objects.all().order_by('-year')[:8]
+    paginate_by = 4
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_queryset(self):
         query = self.request.GET.get('query')
         genre_id = self.request.GET.get('genre')
         if genre_id and query:
@@ -85,6 +85,5 @@ class BrowseMoviesListView(FormView):
             if query:
                 queryset = Movie.objects.filter(title__icontains=query)
         else:
-            queryset = self.default_queryset
-        context["movies"] = queryset
-        return context
+            queryset = Movie.objects.all().order_by('-year')[:10]
+        return queryset

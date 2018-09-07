@@ -25,4 +25,46 @@
     </div>
     {% endfor %}
   </div>
+  {% if is_paginated %}
+  <div class="container center-child mt-40 mb-40">
+    <div class="field has-addons">
+      <p class="control">
+        {% if page_obj.has_previous %}
+        <a class="button is-success"
+          href="{% url 'movies:browse_movies' %}?page={{ page_obj.previous_page_number }}">
+          <span class="icon is-small">
+            <i class="fas fa-arrow-left"></i>
+          </span>
+          <span>Previous</span>
+        </a>
+        {% else %}
+        <a class="button is-static is-success">
+          <span class="icon is-small">
+            <i class="fas fa-arrow-left"></i>
+          </span>
+          <span>Previous</span>
+        </a>
+        {% endif %}
+      </p>
+      <p class="control">
+        {% if page_obj.has_next %}
+        <a class="button is-success"
+          href="{% url 'movies:browse_movies' %}?page={{ page_obj.next_page_number }}">
+          <span class="icon is-small">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+          <span>Next</span>
+        </a>
+        {% else %}
+        <a class="button is-static is-success">
+          <span class="icon is-small">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+          <span>Next</span>
+        </a>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+  {% endif %}
 </div>

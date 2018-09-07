@@ -208,3 +208,9 @@ div.navbar-menu.is-active {
 .container {
   padding: 0 15px;
 }
+
+.footer {
+  padding-bottom: 30px;
+  position: relative;
+  z-index: 10;
+}
