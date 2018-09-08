@@ -78,7 +78,7 @@ class BrowseMoviesListView(BaseListView, FormView):
         genre_id = self.request.GET.get('genre')
         if genre_id and query:
             queryset = Genre.objects.get(
-                id=genre_id).movies().filter(title__icontains=query)
+                id=genre_id).movies.filter(title__icontains=query)
         elif genre_id or query:
             if genre_id:
                 queryset = Genre.objects.get(id=genre_id).movies.all()
