@@ -29,6 +29,6 @@ class CommentForm(forms.ModelForm):
 class BrowseMoviesForm(forms.Form):
     query = forms.CharField(required=False)
     genre = forms.ModelChoiceField(
-        queryset=Genre.objects.all(),
+        queryset=Genre.objects.all().order_by('name'),
         empty_label="Select Genre",
         required=False)
