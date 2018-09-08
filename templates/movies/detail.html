@@ -31,12 +31,19 @@
         <div class="mt-40">
           <p class="is-size-6">
             Download Links:
-            {% if download_links %}
-              {% for link in download_links %}
-              <a href="{{ link.link }}" class="button is-small is-outlined is-transparent">{{ link.quality }}</a>
-              {% endfor %}
+            {% if user.is_authenticated %}
+              {% if download_links %}
+                {% for link in download_links %}
+                <a href="{{ link.link }}" class="button is-small is-outlined is-transparent">{{ link.quality }}</a>
+                {% endfor %}
+              {% else %}
+              <span class="is-size-7">Not Available. Check again later.</span>
+              {% endif %}
             {% else %}
-            <span class="is-size-7">Not Available. Check again later.</span>
+              <span>
+                <a href="{% url 'accounts:login' %}?next={{ movie.get_absolute_url }}" class="has-text-success">Login</a>
+                to view download links.
+              </span>
             {% endif %}
           </p>
           <p class="mt-20 is-size-5">
