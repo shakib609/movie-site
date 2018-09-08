@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.views.generic import CreateView
 from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView as DLoginView
 
 from .forms import UserCreationForm
@@ -17,7 +18,7 @@ class RegisterView(CreateView):
     model = User
     template_name = 'accounts/register.html'
     form_class = UserCreationForm
-    success_url = '/'
+    success_url = reverse_lazy('movies:homepage')
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
