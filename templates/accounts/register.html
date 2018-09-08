@@ -29,6 +29,7 @@
               name="{{ field.html_name }}"
               value="{% if field.value %}{{ field.value }}{% else %}{% endif %}"
               placeholder="{{ field.label }}"
+              {% if field.html_name == "username" %}autofocus{% endif %}
               required>
             <span class="icon is-small is-left">
               {% if field.html_name == "username" %}
