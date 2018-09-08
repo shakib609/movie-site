@@ -4,9 +4,9 @@
 {% block title %}Browse Movies | {{ block.super }}{% endblock title %}
 
 {% block content %}
-  <div class="container is-fluid">
+  <div class="container">
     <div class="columns is-multiline">
-      <div class="column is-8 is-offset-2 mt-70 mb-40">
+      <div class="column is-6 is-offset-3 mt-70 mb-40">
         <h1 class="title has-text-grey-lighter has-text-centered">
           Search
         </h1>
@@ -43,5 +43,12 @@
       </div>
     </div>
   </div>
+  {% if count %}
+  <div class="container mt-10 mb-30">
+    <h3 class="subtitle has-text-success has-text-centered has-text-weight-bold">
+      {{ count }} Movie{{ count|pluralize }} found!
+    </h3>
+  </div>
+  {% endif %}
   {% include 'include/movie-list.html' %}
 {% endblock content %}

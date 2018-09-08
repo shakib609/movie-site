@@ -1,6 +1,6 @@
 {% load static %}
 {% load mytags %}
-
+{% if movies %}
 <div class="container">
   <div class="columns is-multiline mt-10">
     {% for movie in movies %}
@@ -28,46 +28,60 @@
   </div>
   {% if is_paginated %}
   {% with query=request.GET|get_item:'query' genre=request.GET|get_item:'genre' %}
-  <div class="container center-child mt-40 mb-40">
-    <div class="field has-addons">
-      <p class="control">
-        {% if page_obj.has_previous %}
-        <a class="button is-success"
-          href="{% url 'movies:browse_movies' %}?page={{ page_obj.previous_page_number }}&query={{ query }}&genre={{ genre }}">
-          <span class="icon is-small">
-            <i class="fas fa-arrow-left"></i>
-          </span>
-          <span>Previous</span>
-        </a>
-        {% else %}
-        <a class="button is-static is-success">
-          <span class="icon is-small">
-            <i class="fas fa-arrow-left"></i>
-          </span>
-          <span>Previous</span>
-        </a>
-        {% endif %}
-      </p>
-      <p class="control">
-        {% if page_obj.has_next %}
-        <a class="button is-success"
-          href="{% url 'movies:browse_movies' %}?page={{ page_obj.next_page_number }}&query={{ query }}&genre={{ genre }}">
-          <span class="icon is-small">
-            <i class="fas fa-arrow-right"></i>
-          </span>
-          <span>Next</span>
-        </a>
-        {% else %}
-        <a class="button is-static is-success">
-          <span class="icon is-small">
-            <i class="fas fa-arrow-right"></i>
-          </span>
-          <span>Next</span>
-        </a>
-        {% endif %}
-      </p>
+  <div class="columns mt-40 mb-40">
+    <div class="column center-child">
+      <div class="field has-addons">
+        <p class="control">
+          {% if page_obj.has_previous %}
+          <a class="button is-success"
+            href="{% url 'movies:browse_movies' %}?page={{ page_obj.previous_page_number }}&query={{ query }}&genre={{ genre }}">
+            <span class="icon is-small">
+              <i class="fas fa-arrow-left"></i>
+            </span>
+            <span>Prev</span>
+          </a>
+          {% else %}
+          <a class="button is-static is-success">
+            <span class="icon is-small">
+              <i class="fas fa-arrow-left"></i>
+            </span>
+            <span>Prev</span>
+          </a>
+          {% endif %}
+        </p>
+        <p class="control">
+          {% if page_obj.has_next %}
+          <a class="button is-success"
+            href="{% url 'movies:browse_movies' %}?page={{ page_obj.next_page_number }}&query={{ query }}&genre={{ genre }}">
+            <span>Next</span>
+            <span class="icon is-small">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+          </a>
+          {% else %}
+          <a class="button is-static is-success">
+            <span>Next</span>
+            <span class="icon is-small">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+          </a>
+          {% endif %}
+        </p>
+      </div>
     </div>
   </div>
   {% endwith %}
   {% endif %}
 </div>
+{% else %}
+<div class="hero is-medium">
+  <div class="hero-body">
+    <h3 class="title has-text-success has-text-centered">
+      No movies found!
+    </h3>
+    <p class="subtitle is-size-5 has-text-grey-lighter has-text-centered">
+      Try something else?
+    </p>
+  </div>
+</div>
+{% endif %}

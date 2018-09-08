@@ -72,6 +72,7 @@ class BrowseMoviesListView(BaseListView, FormView):
     http_method_names = ['get']
     form_class = BrowseMoviesForm
     paginate_by = 8
+    count = 0
 
     def get_queryset(self):
         query = self.request.GET.get('query')
@@ -86,4 +87,10 @@ class BrowseMoviesListView(BaseListView, FormView):
                 queryset = Movie.objects.filter(title__icontains=query)
         else:
             queryset = Movie.objects.all().order_by('-year')[:10]
+        self.count = queryset.count()
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['count'] = self.count
+        return context
